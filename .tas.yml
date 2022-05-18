@@ -1,12 +1,20 @@
 ---
 framework: mocha
 preRun:
+     env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+          ELECTRON_SKIP_BINARY_DOWNLOAD: 1
      command:
-        - yarn
+        - yarn --frozen-lockfile --network-timeout 180000
+        - yarn npm-run-all --max_old_space_size=4095 -lp compile "electron x64" playwright-install download-builtin-extensions
+        - yarn compile
 preMerge:
   pattern:
     - "./test/unit/node/index.js"
 postMerge:
+  env:
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+    ELECTRON_SKIP_BINARY_DOWNLOAD: 1
   pattern:
     - "./test/unit/node/index.js"
 postRun:
