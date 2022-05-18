@@ -3,7 +3,6 @@ framework: mocha
 preRun:
      command:
         - yarn
-        - yarn --frozen-lockfile --network-timeout 180000
 preMerge:
   pattern:
     - "./test/unit/node/index.js"
@@ -14,4 +13,5 @@ postRun:
      command:
         - node --version
 configFile: mocharc.yml
+nodeVersion: 16.0.0
 version: 1.0
